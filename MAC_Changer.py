@@ -1,4 +1,4 @@
-import subprocess
+import subprocess # To execute system commands
 import optparse #Allow us to get arguments from the user
 import re #Regex
 
@@ -17,7 +17,7 @@ def get_arguments():
 
 def change_mac(interface, new_mac):
     subprocess.run(['ifconfig', interface, 'down'])  # Put the interface down
-    subprocess.run(['ifconfig', interface, 'hw', 'ether', new_mac]) # Mudar o MAC para oq a gente quiser, (ether eh o MAC)
+    subprocess.run(['ifconfig', interface, 'hw', 'ether', new_mac]) # Change the MAC to whatever you want
     subprocess.run(['ifconfig', interface, 'up'])  # Put the interface up again
 
 def get_current_mac(interface):
@@ -30,7 +30,7 @@ def get_current_mac(interface):
 
 options = get_arguments()
 current_mac = get_current_mac(options.interface)
-print('Current MAC: ' + str(current_mac)) #Transforma current_mac em string
+print('Current MAC: ' + str(current_mac)) #Transform current_mac into string
 change_mac(options.interface, options.new_mac)
 if current_mac == options.new_mac:
     print('MAC address did not change ' + str(current_mac))
